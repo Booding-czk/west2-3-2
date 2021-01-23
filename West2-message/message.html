@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .box{
+        width: 420px;
+        border: 1px solid #bfcbd8;
+        background: #fff;
+        padding: 20px;
+    }
+    .input-item{
+        float: left;
+        width: 400px;
+        padding-bottom: 10px;
+    }
+    .label-name{
+        width: 110px;
+        text-align: right;
+        margin-right: 20px;
+        float: left;
+        line-height: 30px;
+        padding: 0;
+        vertical-align: middle;
+    }
+    .context{
+        float: left;
+        width: 220px;
+        height: 25px;
+        vertical-align:middle;
+        border-radius: 2px;
+        border: 1px solid #bfcbd8;
+    }
+
+</style>
+<body>
+    <div class="box">
+        <div class="input-item">
+            <label class="label-name">昵称:</label>
+            <div >
+               <input class="context" id="nickName" placeholder=" 你的昵称" type="text" maxlength="10">
+            </div>
+        </div>
+        <div class="input-item">
+            <label class="label-name">性别:</label>
+            <span class="gender">
+            <input type="radio" name="gender" checked="true">
+            <span>男</span>
+            <input type="radio" name="gender">
+            <span>女</span>
+        </span>
+        </div>
+        <div class="input-item">
+            <label class="label-name">手机号码:</label>
+            <input class="context" id="phoneNumber" placeholder=" 你的手机号码" type="text" maxlength="11" >
+        </div>
+        <div class="input-item">
+            <label class="label-name">修改密码:</label>
+            <input class="context " id="pwd1" placeholder=" 新的密码" type="password" maxlength="11" >
+        </div>
+        <div class="input-item">
+            <label class="label-name">再次输入密码:</label>
+            <input class="context " id="pwd2" placeholder=" 再次输入密码" type="password" maxlength="11" >
+        </div>
+
+        <div>
+            <button id="save" type="button" style="display:block;margin:0 auto;border:1px solid #bfcbd8;">
+                <span>保存</span>
+            </button>
+        </div>
+    </div>
+
+</body>
+<script>
+    let save = document.getElementById('save');
+    save.onclick=function (){
+        let name = document.getElementById("nickName").value;
+        let phone = document.getElementById("phoneNumber").value;
+        let pwd1 = document.getElementById("pwd1").value;
+        let pwd2 = document.getElementById("pwd2").value;
+        let nameRegex = /.+/;
+        let nameValid = nameRegex.test(name)
+        let phoneRegex = /^1[3-9][0-9]{9}$/;
+        let phoneValid = phoneRegex.test(phone)
+        let pwd1Regex1 = /.{9,15}/; // length
+        let pwd1Regex2 = /^.*[#&*?@].*$/; // Special characters
+        let pwd1Regex3 = /^.*[0-9].*[0-9].*$/; // two digits
+        let pwd1Regex4 = /^.*[a-z].*$/; // Lowercase letter
+        let pwd1Regex5 = /^.*[A-Z].*$/; // Uppercase letter
+        let pwd1valid = pwd1Regex1.test(pwd1) && pwd1Regex2.test(pwd1) && pwd1Regex3.test(pwd1) && pwd1Regex4.test(pwd1) && pwd1Regex5.test(pwd1)
+        let pwd2valid = (pwd2 == pwd1)
+        if (nameValid && phoneValid && pwd1valid && pwd2valid) {
+            alert("修改成功")
+        }else {
+            alert("格式错误")
+
+        }
+    }
+</script>
+</html>
